@@ -4,8 +4,9 @@
   "description": "node sandboxing efforts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "node-gyp configure build"
+    "test": "node test.js",
+    "install": "node-gyp configure build",
+    "install-debug": "node-gyp configure build -d"
   },
   "repository": {
     "type": "git",
