@@ -14,3 +14,9 @@ test_script:
   - npm run test
 
 build: off
+
+artifacts:
+- path: build/Release/sandbox.node
+  name: windows/sandbox.node
+
+
