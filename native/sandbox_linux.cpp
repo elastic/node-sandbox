@@ -3,18 +3,15 @@
 #include <linux/seccomp.h>
 #include <linux/filter.h>
 #include <sys/syscall.h>
-#include <stddef.h>
-#include <sys/types.h>
 #include <errno.h>
-#include <stdio.h>
 #include <sys/prctl.h>
-#include <unistd.h>
 
+#include <string.h> /* for strerror */
 
-const struct sock_filter reject_syscalls[] = {
-  // Verify arch of syscall
-  BPF_STMT(BPF_LD|BPF_W|BPF_ABS, (offsetof(struct seccomp_data, arch))),
-  BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K, ARCH_NR, 1, 0), \
+struct sock_filter reject_syscalls[] = {
+  // TODO(sissel): Verify arch of syscall
+  //BPF_STMT(BPF_LD|BPF_W|BPF_ABS, (offsetof(struct seccomp_data, arch))),
+  //BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K, ARCH_NR, 1, 0), 
 
   // LD|W|ABS == Load Word at ABSolute offset
   // Load the syscall number
@@ -39,7 +36,7 @@ const struct sock_filter reject_syscalls[] = {
 
 Sandbox::Result Sandbox::activate() {
   struct sock_filter *filter = reject_syscalls;
-  unsigned short count = sizeof(reject_inet_socket) / sizeof(filter[0]);
+  unsigned short count = sizeof(reject_syscalls) / sizeof(filter[0]);
 
   struct sock_fprog prog = {
     .len = count,
@@ -47,11 +44,13 @@ Sandbox::Result Sandbox::activate() {
   };
 
   if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0)) {
-    return { false, "prctl(PR_SET_NO_NEW_PRIVS, ...) failed: " + strerror(errno) };
+    static const std::string prctl_privs_error = "prctl(PR_SET_NO_NEW_PRIVS, ...) failed: ";
+    return { false, prctl_privs_error + strerror(errno) };
   }
 
   if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog)) {
-    return { false, "prctl(PR_SET_SECCOMP, ...) failed: " + strerror(errno) };
+    static const std::string prctl_seccomp_error = "prctl(PR_SET_SECCOMP, ...) failed: ";
+    return { false, prctl_seccomp_error + strerror(errno) };
   }
 
   return Sandbox::SUCCESS;
