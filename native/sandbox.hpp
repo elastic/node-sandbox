@@ -9,7 +9,7 @@ namespace Sandbox {
     } Result;
 
     const Result NOT_IMPLEMENTED { false, "Sandboxing is not implemented for this platform" };
-    const Result SUCCESS { true, nullptr };
+    const Result SUCCESS { true, "" };
 
     Result activate();
 };
