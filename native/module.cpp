@@ -10,14 +10,17 @@ using v8::Local;
 using v8::Object;
 using v8::String;
 using v8::Value;
+using v8::Boolean;
 
 void Activate(const FunctionCallbackInfo<Value>& args) {
-  Isolate* isolate = args.GetIsolate();
-
   Sandbox::Result r = Sandbox::activate();
 
-  // XXX: Check result and pass it back to node.
-  args.GetReturnValue().Set(String::NewFromUtf8(isolate, "activate"));
+  Isolate* isolate = args.GetIsolate();
+  // return { success: bool, message: string } based on Sandbox::Result
+  Local<Object> result = Object::New(isolate);
+  result->Set(String::NewFromUtf8(isolate, "success"), Boolean::New(isolate, r.success));
+  result->Set(String::NewFromUtf8(isolate, "message"), String::NewFromUtf8(isolate, r.message.c_str()));
+  args.GetReturnValue().Set(result);
 }
 
 void init(Local<Object> exports) {
