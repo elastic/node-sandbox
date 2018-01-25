@@ -8,6 +8,8 @@
 #include <sys/prctl.h>
 #include <unistd.h>
 
+#include "sandbox.h"
+
 const struct sock_filter reject_syscalls[] = {
   // Verify arch of syscall
   BPF_STMT(BPF_LD|BPF_W|BPF_ABS, (offsetof(struct seccomp_data, arch))),

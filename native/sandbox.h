@@ -1,5 +1,5 @@
-#ifndef _RESTRICT_H_
-#define _RESTRICT_H_
+#ifndef _SANDBOX_H_
+#define _SANDBOX_H_
 #include <string>
 
 namespace Sandbox {
@@ -14,4 +14,4 @@ namespace Sandbox {
     Result activate();
 };
 
-#endif /* _RESTRICT_H_ */
+#endif /* _SANDBOX_H_ */
