@@ -5,11 +5,11 @@
 namespace Sandbox {
     typedef struct {
         bool success;
-        std::string message = nullptr;
+        std::string message;
     } Result;
 
-    const Result NOT_IMPLEMENTED = { false, "Sandboxing is not implemented for this platform" };
-    const Result SUCCESS = { true, nullptr };
+    const Result NOT_IMPLEMENTED { false, "Sandboxing is not implemented for this platform" };
+    const Result SUCCESS { true, nullptr };
 
     Result activate();
 };
