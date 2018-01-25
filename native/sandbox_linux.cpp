@@ -1,3 +1,5 @@
+#include "sandbox.hpp"
+
 #include <linux/seccomp.h>
 #include <linux/filter.h>
 #include <sys/syscall.h>
@@ -8,7 +10,6 @@
 #include <sys/prctl.h>
 #include <unistd.h>
 
-#include "sandbox.h"
 
 const struct sock_filter reject_syscalls[] = {
   // Verify arch of syscall

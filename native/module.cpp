@@ -2,7 +2,7 @@
 #include <node.h>
 #include <stdio.h>
 
-#include "sandbox.h"
+#include "sandbox.hpp"
 
 using v8::FunctionCallbackInfo;
 using v8::Isolate;
