@@ -11,16 +11,17 @@ using v8::Object;
 using v8::String;
 using v8::Value;
 
-void Lockdown(const FunctionCallbackInfo<Value>& args) {
+void Activate(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
 
-  //int v = lockdown();
+  Sandbox::Result r = Sandbox::activate();
 
-  args.GetReturnValue().Set(String::NewFromUtf8(isolate, "lockdown"));
+  // XXX: Check result and pass it back to node.
+  args.GetReturnValue().Set(String::NewFromUtf8(isolate, "activate"));
 }
 
 void init(Local<Object> exports) {
-  NODE_SET_METHOD(exports, "lockdown", Lockdown);
+  NODE_SET_METHOD(exports, "activate", Activate);
 }
 
 NODE_MODULE(NODE_GYP_MODULE_NAME, init)

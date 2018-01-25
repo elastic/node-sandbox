@@ -34,7 +34,7 @@ const struct sock_filter reject_syscalls[] = {
   BPF_STMT(BPF_RET|BPF_K, SECCOMP_RET_ERRNO|(EACCES&SECCOMP_RET_DATA)),
 };
 
-int lockdown() {
+Sandbox::Result Sandbox::activate() {
   struct sock_filter *filter = reject_syscalls;
   unsigned short count = sizeof(reject_inet_socket) / sizeof(filter[0]);
 
@@ -44,12 +44,12 @@ int lockdown() {
   };
 
   if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0)) {
-    perror("seccomp PR_SET_NO_NEW_PRIVS");
-    return 1;
+    return { false, "prctl(PR_SET_NO_NEW_PRIVS, ...) failed: " + strerror(errno) };
   }
 
   if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog)) {
-    perror("seccomp");
-    return 1;
+    return { false, "prctl(PR_SET_SECCOMP, ...) failed: " + strerror(errno) };
   }
+
+  return Sandbox::SUCCESS;
 }
