@@ -1,0 +1,21 @@
+{
+  "name": "sandbox",
+  "version": "0.0.1",
+  "description": "node sandboxing efforts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp configure build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elastic/node-sandbox.git"
+  },
+  "author": "Jordan Sissel",
+  "license": "Apache-2.0",
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/elastic/node-sandbox/issues"
+  },
+  "homepage": "https://github.com/elastic/node-sandbox#readme"
+}

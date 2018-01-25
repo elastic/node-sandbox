@@ -1,0 +1,15 @@
+environment:
+  matrix:
+    - nodejs_version: "6"
+
+# from https://www.appveyor.com/docs/lang/nodejs-iojs/
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - set PATH=%APPDATA%\npm;%PATH%
+  - npm install
+
+test_script:
+  - node --version
+  - npm --version
+
+build: off
