@@ -3,6 +3,7 @@
 #include <linux/seccomp.h>
 #include <linux/filter.h>
 #include <sys/syscall.h>
+#include <stddef.h>
 #include <errno.h>
 #include <sys/prctl.h>
 
