@@ -52,3 +52,13 @@ Testing:
 ```
 npm test
 ```
+
+Packaging:
+
+Note: Release packages are still composed by hand, but if you want to build local for a single platform, you can do this:
+
+```
+npm run build
+npm test
+npm pack
+```
