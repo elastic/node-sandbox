@@ -7,7 +7,7 @@ platform: x64
 
 # from https://www.appveyor.com/docs/lang/nodejs-iojs/
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version x64
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
   - npm pack
