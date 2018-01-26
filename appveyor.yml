@@ -2,6 +2,9 @@ environment:
   matrix:
     - nodejs_version: "6"
 
+# Test on 64bit only. (The default is otherwise x86 32bit)
+platform: x64
+
 # from https://www.appveyor.com/docs/lang/nodejs-iojs/
 install:
   - ps: Install-Product node $env:nodejs_version
