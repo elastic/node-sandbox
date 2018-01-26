@@ -1,0 +1,9 @@
+build/**/*
+!build/Release/sandbox-*.node
+.travis.yml
+appveyor.yml
+binding.gyp
+native/
+package-lock.json
+test.js
+*.tgz
