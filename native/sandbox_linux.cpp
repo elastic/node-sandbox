@@ -26,7 +26,7 @@ struct sock_filter reject_syscalls[] = {
   BPF_STMT(BPF_LD|BPF_W|BPF_ABS, (offsetof(struct seccomp_data, nr))),
 
   // JMP|JEQ|K Do a jump after comparing EQuality of the loaded value and a
-  // constant. If equal, jump 2 positions forward, if not equal, do not jump(zero jump).
+  // constant. If equal, jump N positions forward, if not equal, do not jump(zero jump).
   BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K, __NR_seccomp, JMP_START, 0),
   BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K, __NR_fork, JMP_START - 1, 0),
   BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K, __NR_vfork, JMP_START - 2, 0),
