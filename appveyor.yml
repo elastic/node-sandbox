@@ -10,6 +10,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
+  - npm pack
 
 test_script:
   - node --version
@@ -19,7 +20,7 @@ test_script:
 build: off
 
 artifacts:
-- path: build/Release/sandbox.node
-  name: windows/sandbox.node
+- path: sandbox-0.0.1.tgz
+  name: npm module
 
 
