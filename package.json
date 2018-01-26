@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
-    "install": "node-gyp configure build",
-    "install-debug": "node-gyp configure build -d"
+    "build": "node-gyp configure build"
   },
   "repository": {
     "type": "git",
@@ -14,7 +13,6 @@
   },
   "author": "Jordan Sissel",
   "license": "Apache-2.0",
-  "gypfile": true,
   "bugs": {
     "url": "https://github.com/elastic/node-sandbox/issues"
   },

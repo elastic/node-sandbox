@@ -1,5 +1,5 @@
 build/**/*
-!build/Release/sandbox-*.node
+!build/Release/sandbox_*.node
 .travis.yml
 appveyor.yml
 binding.gyp
