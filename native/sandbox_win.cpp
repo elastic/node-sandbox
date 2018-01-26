@@ -36,5 +36,5 @@ Sandbox::Result Sandbox::activate() {
         return LastErrorAsResult();
     }
 
-    return { true, "" };
+    return Sandbox::SUCCESS;
 }
