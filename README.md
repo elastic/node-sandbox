@@ -44,7 +44,7 @@ Building requires you have a compiler environment available. For more details on
 Building:
 
 ```
-npm install
+npm run build
 ```
 
 Testing:
@@ -52,4 +52,3 @@ Testing:
 ```
 npm test
 ```
-
