@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('assert');
-const sandbox = require(`./build/Release/sandbox`);
+const sandbox = require("./index.js");
 const child_process = require("child_process");
 
 function tryExec() {
